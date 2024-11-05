@@ -86,7 +86,7 @@ export function ConsolePage() {
         ? { url: USE_LOCAL_RELAY_SERVER_URL }
         : {
             apiKey: apiKey,
-            url: "wss://" + baseUrl + "/realtime",
+            url: baseUrl + "/realtime",
             dangerouslyAllowAPIKeyInBrowser: true,
           }
     )
@@ -160,11 +160,9 @@ export function ConsolePage() {
   }, []);
 
   const resetBseUrl = useCallback(() => {
-    let baseUrl = prompt('BaseUrl: default api.openai.com/v1');
+    let baseUrl = prompt('BaseUrl: default wss://api.openai.com/v1');
     if (baseUrl !== null) {
       // localStorage.clear();
-      // remove https:// and http:// and wss
-      baseUrl = baseUrl.replace(/(^\w+:|^)\/\//, '');
       localStorage.setItem('tmp::base_url', baseUrl);
       window.location.reload();
     }
